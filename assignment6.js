@@ -29,13 +29,13 @@ const showImages = (images) => {
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
-    // toggleSpinner();
+    // toggleSpinner()
   })
   
 }
 
 const getImages = (query) => {
-  // toggleSpinner();    
+    //  toggleSpinner()
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(jsonData => showImages(jsonData.hits))
@@ -48,12 +48,13 @@ let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
   element.classList.toggle('added');
-  // element.classList.remove('added');
  
   let item = sliders.indexOf(img);
   if (item === -1) {  
     sliders.push(img);
     console.log(sliders);
+    totalIssue(sliders.length)
+
   } 
   else if(item !== -1) {
     sliders.pop(img);
@@ -79,6 +80,7 @@ const createSlider = () =>{
   `;
 
   sliderContainer.appendChild(prevNext)
+  
   document.querySelector('.main').style.display = 'block';
  
   // hide image aria
@@ -91,6 +93,7 @@ const createSlider = () =>{
     src="${slide}"
     alt="">`;
     sliderContainer.appendChild(item)
+    
   })
   changeSlide(0)
   timer = setInterval(function () {
@@ -147,4 +150,10 @@ const toggleSpinner = () =>{
   const songsToggle = document.getElementById('images-container');
   spinner.classList.toggle('d-none');
   songsToggle.classList.toggle('d-none');
+}
+
+
+const totalIssue = (totalValue) => {
+  // const issues = JSON.parse(localStorage.getItem('issues')) || [];
+ const totalSelect = document.getElementById("total-issue").innerText= totalValue;
 }

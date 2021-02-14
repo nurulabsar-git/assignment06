@@ -37,13 +37,15 @@ const showImages = (images) => {
 }
 
 const getImages = (query) => {
-  toggleSpinner();    //
+  // toggleSpinner();    
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
-    .then(data => showImages(data.hits))
+    .then(jsonData => showImages(jsonData.hits))
      
     .catch(err => console.log(err))
 }
+
+
 
 let slideIndex = 0;
 const selectItem = (event, img) => {
@@ -54,12 +56,17 @@ const selectItem = (event, img) => {
   if (item === -1) {  
     sliders.push(img);
     console.log(sliders);
-  } else {
-    alert('Hey, Already added !')
+  } 
+  else if(item !== -1) {
+    sliders.pop(img);
+    // alert('Hey, Already added !')
   }
 }
+
+
+
 var timer
-const createSlider = () => {
+const createSlider = () =>{ 
   // check slider image length
   if (sliders.length < 2) {
     alert('Select at least 2 image.')
@@ -79,7 +86,7 @@ const createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   // hide image aria
   imagesArea.style.display = 'none';
-  const duration = document.getElementById('duration').value || 1000;
+  const duration = document.getElementById('duration').value|| 4000;
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";
@@ -94,21 +101,29 @@ const createSlider = () => {
     changeSlide(slideIndex);
   }, duration);
 
-  toggleSpinner(); //
   
 }
+
+
+
+
+
+
 
 // change slider index 
 const changeItem = index => {
   changeSlide(slideIndex += index);
 }
 
+
+
+
 // change slide item
 const changeSlide = (index) => {
 
   const items = document.querySelectorAll('.slider-item');
   if (index < 0) {
-    slideIndex = items.length - 1
+    slideIndex = items.length - 1;
     index = slideIndex;
   };
 
@@ -124,6 +139,13 @@ const changeSlide = (index) => {
   items[index].style.display = "block"
 }
 
+
+
+
+
+
+
+
 searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
@@ -133,14 +155,15 @@ searchBtn.addEventListener('click', function () {
 })
 
 sliderBtn.addEventListener('click', function () {
+  
   createSlider()
 })
 
 
 
-const toggleSpinner = () =>{
-  const spinner = document.getElementById('loading-spinner');
-  // const songsToggle = document.getElementById('song-container');
-  spinner.classList.toggle('d-none');
-  // songsToggle.classList.toggle('d-none');
-}
+// const toggleSpinner = () =>{
+//   const spinner = document.getElementById('loading-spinner');
+//   const songsToggle = document.getElementById('song-container');
+//   spinner.classList.toggle('d-none');
+//   songsToggle.classList.toggle('d-none');
+// }

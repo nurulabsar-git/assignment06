@@ -32,8 +32,9 @@ const showImages = (images) => {
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
+    // toggleSpinner();
   })
-
+  
 }
 
 const getImages = (query) => {
@@ -44,7 +45,6 @@ const getImages = (query) => {
      
     .catch(err => console.log(err))
 }
-
 
 
 let slideIndex = 0;
@@ -62,8 +62,6 @@ const selectItem = (event, img) => {
     // alert('Hey, Already added !')
   }
 }
-
-
 
 var timer
 const createSlider = () =>{ 
@@ -84,6 +82,7 @@ const createSlider = () =>{
 
   sliderContainer.appendChild(prevNext)
   document.querySelector('.main').style.display = 'block';
+ 
   // hide image aria
   imagesArea.style.display = 'none';
   const duration = document.getElementById('duration').value > 0 || 2000;
@@ -104,16 +103,10 @@ const createSlider = () =>{
   
 }
 
-
-
-
 // change slider index 
 const changeItem = index => {
   changeSlide(slideIndex += index);
 }
-
-
-
 
 // change slide item
 const changeSlide = (index) => {
@@ -136,9 +129,6 @@ const changeSlide = (index) => {
   items[index].style.display = "block"
 }
 
-
-
-
 searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
@@ -154,11 +144,9 @@ sliderBtn.addEventListener('click', function () {
   
 })
 
-
-
-// const toggleSpinner = () =>{
-//   const spinner = document.getElementById('loading-spinner');
-//   const songsToggle = document.getElementById('song-container');
-//   spinner.classList.toggle('d-none');
-//   songsToggle.classList.toggle('d-none');
-// }
+const toggleSpinner = () =>{
+  const spinner = document.getElementById('loading-spinner');
+  const songsToggle = document.getElementById('images-container');
+  spinner.classList.toggle('d-none');
+  songsToggle.classList.toggle('d-none');
+}

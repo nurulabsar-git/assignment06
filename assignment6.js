@@ -16,9 +16,6 @@ let searchField = document.getElementById("search").addEventListener("keypress",
     }      
 });
 
-// If this key doesn't work
-// Find the name in the url and go to their website
-// to create your own api key
 const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 
 // show images 
@@ -50,7 +47,8 @@ const getImages = (query) => {
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
-  element.classList.add('added');
+  element.classList.toggle('added');
+  // element.classList.remove('added');
  
   let item = sliders.indexOf(img);
   if (item === -1) {  
